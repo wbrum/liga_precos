@@ -30,9 +30,10 @@ async def on_message(message):
     card_name = ''
     url_ending = '&tipo=1'
 
-    if message.author == client.user or (not message.content.startswith(magic_prefix)
-                                         and not message.content.startswith(pkmn_prefix)
-                                         and not message.content.startswith(ygo_prefix)):
+    if message.author == client.user or (
+        not message.content.startswith(magic_prefix)
+            and not message.content.startswith(pkmn_prefix)
+            and not message.content.startswith(ygo_prefix)):
         return
 
     args = message.content.strip().split(' ')
@@ -54,7 +55,8 @@ async def on_message(message):
         url_beginning = 'https://www.ligayugioh.com.br/?view=cards/card&card='
 
     if args.__len__() == 0:
-        await message.channel.send(f'Você não enviou o nome da carta, {message.author}!')
+        await message.channel.send(
+            f'Você não enviou o nome da carta, {message.author}!')
 
     else:
         for val in args:
