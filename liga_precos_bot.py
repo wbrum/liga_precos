@@ -1,5 +1,4 @@
 import os
-
 import discord
 from dotenv import load_dotenv
 
@@ -17,6 +16,18 @@ magic_prefix = '-magic'
 pkmn_prefix = '-pkmn'
 
 ygo_prefix = '-ygo'
+
+
+def define_prefix(prefix):
+    match prefix:
+        case magic_prefix:
+            return 'https://www.ligamagic.com.br/?view=cards%2Fcard&card='
+        case pkmn_prefix:
+            return 'https://www.ligapokemon.com.br/?view=cards/card&card='
+        case ygo_prefix:
+            return 'https://www.ligayugioh.com.br/?view=cards/card&card='
+        case _:
+            return 'Comando inválido'
 
 
 @client.event
@@ -42,17 +53,7 @@ async def on_message(message):
     print(args)
     print(command)
 
-    if command == magic_prefix:
-
-        url_beginning = 'https://www.ligamagic.com.br/?view=cards%2Fcard&card='
-
-    elif command == pkmn_prefix:
-
-        url_beginning = 'https://www.ligapokemon.com.br/?view=cards/card&card='
-
-    elif command == ygo_prefix:
-
-        url_beginning = 'https://www.ligayugioh.com.br/?view=cards/card&card='
+    url_beginning = define_prefix(command)
 
     if args.__len__() == 0:
         await message.channel.send(
